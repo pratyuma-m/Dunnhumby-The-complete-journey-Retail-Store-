@@ -1,0 +1,127 @@
+select hh_comp_desc,household_size_desc,kid_category_desc, count(*) from hh_demographic where marital_status_code = 'A' group by hh_comp_desc,household_size_desc,kid_category_desc;
+   hh_comp_desc   | household_size_desc | kid_category_desc | count
+------------------+---------------------+-------------------+-------
+ Single Female    | 2                   | None/Unknown      |    33
+ 2 Adults Kids    | 3                   | 1                 |    55
+ 1 Adult Kids     | 5+                  | 3+                |     6
+ 1 Adult Kids     | 4                   | 2                 |     4
+ 2 Adults No Kids | 2                   | None/Unknown      |   135
+ Unknown          | 2                   | None/Unknown      |     3
+ 1 Adult Kids     | 3                   | 1                 |     6
+ Unknown          | 3                   | 1                 |     5
+ Unknown          | 5+                  | 3+                |     1
+ 2 Adults Kids    | 5+                  | 3+                |    49
+ 2 Adults Kids    | 4                   | 2                 |    31
+ Single Male      | 2                   | None/Unknown      |    12
+
+
+
+select hh_comp_desc,household_size_desc,kid_category_desc, count(*) from hh_demographic where marital_status_code = 'B' group by hh_comp_desc,household_size_desc,kid_category_desc;
+   hh_comp_desc   | household_size_desc | kid_category_desc | count
+------------------+---------------------+-------------------+-------
+ 1 Adult Kids     | 4                   | 3+                |     2
+ Unknown          | 1                   | None/Unknown      |     2
+ 2 Adults Kids    | 3                   | 1                 |     5
+ 1 Adult Kids     | 5+                  | 3+                |     1
+ Single Female    | 1                   | None/Unknown      |    39
+ 1 Adult Kids     | 3                   | 2                 |     6
+ 2 Adults No Kids | 2                   | None/Unknown      |    28
+ 2 Adults Kids    | 5+                  | 3+                |     2
+ 2 Adults Kids    | 4                   | 2                 |     2
+ 1 Adult Kids     | 2                   | 1                 |     5
+ Single Male      | 1                   | None/Unknown      |    25
+
+select kid_category_desc, count(*) from hh_demographic where marital_status_code = 'B' group by kid_category_desc;                    kid_category_desc | count
+-------------------+-------
+ 2                 |     8
+ 1                 |    10
+ None/Unknown      |    94
+ 3+                |     5
+(4 rows)
+
+dunhumby_completejourney=# select age_desc, count(*) from hh_demographic where marital_status_code = 'B' group by age_desc;
+ age_desc | count
+----------+-------
+ 19-24    |    10
+ 45-54    |    27
+ 55-64    |     8
+ 35-44    |    31
+ 25-34    |    26
+ 65+      |    15
+
+ select age_desc, count(*) from hh_demographic where marital_status_code = 'A' group by age_desc;
+ age_desc | count
+----------+-------
+ 19-24    |     9
+ 45-54    |   112
+ 55-64    |    36
+ 35-44    |    96
+ 25-34    |    52
+ 65+      |    35
+(6 rows)
+
+dunhumby_completejourney=# select age_desc, count(*) from hh_demographic where marital_status_code = 'U' group by age_desc;
+ age_desc | count
+----------+-------
+ 19-24    |    27
+ 45-54    |   149
+ 55-64    |    15
+ 35-44    |    67
+ 25-34    |    64
+ 65+      |    22
+
+ select income_desc, count(*) from hh_demographic where age_desc = '45-54' group by income_desc;
+ income_desc | count
+-------------+-------
+ 250K+       |     5
+ 15-24K      |    25
+ 25-34K      |    25
+ 75-99K      |    41
+ 50-74K      |    82
+ 100-124K    |    10
+ 125-149K    |    12
+ 200-249K    |     1
+ Under 15K   |    20
+ 35-49K      |    51
+ 150-174K    |    10
+ 175-199K    |     6
+
+ select marital_status_code, count(*) from hh_demographic where age_desc = '45-54' group by marital_status_code;
+ marital_status_code | count
+---------------------+-------
+ A                   |   112
+ B                   |    27
+ U                   |   149
+
+
+select homeowner_desc, count(*) from hh_demographic where age_desc = '45-54' group by homeowner_desc;
+ homeowner_desc  | count
+-----------------+-------
+ Homeowner       |   192
+ Probable Owner  |     2
+ Unknown         |    79
+ Probable Renter |     4
+ Renter          |    11
+(5 rows)
+
+dunhumby_completejourney=# select hh_comp_desc, count(*) from hh_demographic where age_desc = '45-54' group by hh_comp_desc;
+   hh_comp_desc   | count
+------------------+-------
+ 2 Adults No Kids |    96
+ 2 Adults Kids    |    58
+ Unknown          |    50
+ Single Male      |    28
+ 1 Adult Kids     |    13
+ Single Female    |    43
+
+
+select kid_category_desc, count(*) from hh_demographic where age_desc = '45-54' group by kid_category_desc;
+ kid_category_desc | count
+-------------------+-------
+ 2                 |    17
+ 1                 |    39
+ None/Unknown      |   211
+ 3+                |    21
+
+
+
